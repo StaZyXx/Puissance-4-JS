@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "Montsserat";
+    src: url(./assets/font/Montserrat/Montserrat-Regular.ttf);
+}
+*{
+    font-family: "Montsserat";
+}
+
 #github_img{
     margin: 15px 0px 0px 100px;
     width: 50px;
@@ -39,7 +47,7 @@ nav{
     flex-direction: row;
     justify-content: space-between;
 }
-a{
+.button{
     margin-top: 10px;
     display: block;
     width: 50%;
@@ -56,12 +64,12 @@ a{
     transition: all .35s;
 }
 
-a span{
+.button span{
     position: relative;
     z-index: 2;
 }
 
-a:after{
+.button:after{
     position: absolute;
     content: "";
     top: 0;
@@ -72,10 +80,10 @@ a:after{
     transition: all .35s;
 }
 
-a:hover{
+.button:hover{
     color: #fff;
 }
 
-a:hover:after{
+.button:hover:after{
     width: 100%;
 }

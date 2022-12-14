@@ -6,12 +6,13 @@ let player = Math.trunc(Math.random() * (max - min +1)) + min;
 
 
 let tableau = [];
-let rows = prompt("Quelle est le nombre de lignes que vous souhaitez ?")
-let cols = prompt("Quelle est le nombre de colonnes que vous souhaitez ?")
-    while (rows < 4 ){
+let rows = eval(prompt("Quelle est le nombre de lignes que vous souhaitez ?"))
+let cols = eval(prompt("Quelle est le nombre de colonnes que vous souhaitez ?"))
+console.log(rows);
+    while  (rows < 4 ){
         rows = prompt("Quelle est le nombre de lignes que vous souhaitez ?")
     }
-    while (cols < 4){
+    while ( rows < 4){
         cols = prompt("Quelle est le nombre de colonnes que vous souhaitez ?")
     }
 
@@ -175,9 +176,10 @@ function checkDiags(i, j){
     } 
 
     while (tempI <= n-1 && tempJ <= n-1){
-        if (tableau[tempI][tempJ] == player){
+        if (tableau[tempI][tempJ] == 1){
             somme_point1 += 1
-        }else if (tableau[tempI][tempJ] == 0){
+        }
+        else if (tableau[tempI][tempJ] !=1){
             somme_point1 = 0
         }
 
@@ -189,28 +191,61 @@ function checkDiags(i, j){
     }
     tempI = i
     tempJ = j
+    somme_point1=0
+    while (tempI <= n-1 && tempJ <= n-1){
+        if (tableau[tempI][tempJ] == 2){
+            somme_point1 += 1
+        }
+        else if (tableau[tempI][tempJ]  !=2){
+            somme_point1 = 0
+        }
+
+        if(somme_point1 >= 4){
+            return true
+        }
+        tempI+=1
+        tempJ+=1  
+
+    }
+    tempI = i
+    tempJ = j
 
     somme_point2 = 0
         while (tempI > 0 && tempJ < n-1){
             tempI -= 1
             tempJ += 1
         }
-
         while (tempI <= n-1 && tempJ >= 0){
-            if (tableau[tempI][tempJ] == player){
+            if (tableau[tempI][tempJ] == 1){
                 somme_point2 += 1
             }
-
-            else if (tableau[tempI][tempJ] == 0){
+            else if (tableau[tempI][tempJ] !=1){
                 somme_point2 = 0
             }
             
             if(somme_point2 >= 4){
                 return true
             }
-            tempI+=1
-            tempJ-=1
-        }   
+        tempI+=1
+        tempJ-=1
+        }
+        tempI = i
+        tempJ = j
+        somme_point2=0
+        while (tempI <= n-1 && tempJ >= 0){
+            if (tableau[tempI][tempJ] == 2){
+                somme_point2 += 1
+            }
+            else if (tableau[tempI][tempJ] !=2){
+                somme_point2 = 0
+            }
+            
+            if(somme_point2 >= 4){
+                return true
+            }
+        tempI+=1
+        tempJ-=1 
+        }
     return false
 }
 
@@ -235,9 +270,18 @@ let score = [0,0]
 localStorage.setItem("score",JSON.stringify(score))
 function displayScores(){
     const scores = document.getElementById("scores")
-    scores.innerText=score[0]+" VS "+score[1]
+    scores.innerText=score[0]+"VS"+score[1]
 }
 
+function restart(){
+    tableau = []
+    tableauVide(rows, cols)
+    showBoard()
+    score[0]=0
+    score[1]=0
+    s=0
+    m=0
+}
 tableauVide(rows,cols)
 showBoard()
 timer()
